@@ -6,6 +6,6 @@
   "source-url"   : "git://github.com/madcapjake/p6-xtest.git",
   "depends"      : [],
   "provides"     : {
-    "X11::XTEST" : "lib/XTest.pm6"
+    "X11::XTEST" : "lib/X11/XTest.pm6"
   }
 }
