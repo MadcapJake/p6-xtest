@@ -1,0 +1,11 @@
+{
+  "name"         : "X11::XTest",
+  "version"      : "0.0.1",
+  "author"       : "github:madcapjake",
+  "description"  : "XTest wrapper",
+  "source-url"   : "git://github.com/madcapjake/p6-xtest.git",
+  "depends"      : [],
+  "provides"     : {
+    "X11::XTEST" : "lib/XTest.pm6"
+  }
+}
