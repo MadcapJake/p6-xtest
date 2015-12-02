@@ -88,7 +88,7 @@ class XTest {
 
   method close() { close-display($.display) }
 
-  proto key-event(Str:D $key) {
+  proto method key-event(Str:D $key) {
     given $key {
       when $_ eq '-'   { $key = 'minus' }
       when $_ eq $_.uc { $key = "Shift-{$_}" }
@@ -99,11 +99,11 @@ class XTest {
     }
     { * }
   }
-  multi method key-event(Str:D $key, :up) {
+  multi method key-event(Str:D $key, :$up) {
     for @!presses { fake-key-event($!display, $_, True,  0) }
     flush-display($!display);
   }
-  multi method key-event(Str:D $key, :down) {
+  multi method key-event(Str:D $key, :$down) {
     for @!presses { fake-key-event($!display, $_, False, 0) }
     flush-display($!display);
   }
