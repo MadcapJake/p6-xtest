@@ -1,13 +1,13 @@
 use NativeCall;
 
-sub xtest-lib() { '/usr/include/X11/extensions/XTest.h' }
-sub x11-lib() { '/usr/include/X11/Xlib.h' }
+sub xtest-lib() { '/usr/lib/x86_64-linux-gnu/libXtst.so' }
+sub x11-lib()   { '/usr/lib/x86_64-linux-gnu/libX11.so' }
 
 =head X11 XLib routines
 
 class Display is repr('CPointer') { }
 
-constant KeySym  = uint32;
+constant KeySym  = uint64;
 constant KeyCode = uint8;
 constant NoSymbol = 0;
 
@@ -18,13 +18,13 @@ sub open-display(Str)
     { * }
 
 sub close-display(Display)
-    returns int32
+    returns int64
     is native(&x11-lib)
     is symbol('XCloseDisplay')
     { * }
 
 sub flush-display(Display)
-    returns int32
+    returns int64
     is native(&x11-lib)
     is symbol('XFlush')
     { * }
@@ -35,7 +35,7 @@ sub string-to-keysym(Str)
     is symbol('XStringToKeysym')
     { * }
 
-sub keysym-to-keycode(Display, uint32)
+sub keysym-to-keycode(Display, uint64)
     returns KeyCode
     is native(&x11-lib)
     is symbol('XKeysymToKeycode')
@@ -49,26 +49,26 @@ sub keycode(Display $dpy, Str:D $key) {
 
 =head X11 XTest extension routines
 
-our sub fake-key-event(Display, uint32, Bool, ulong)
-    returns int32
+our sub fake-key-event(Display, uint64, Bool, ulong)
+    returns int64
     is native(&xtest-lib)
     is symbol('XTestFakeKeyEvent')
     { * }
 
-our sub fake-button-event(Display, uint32, Bool, ulong)
-    returns int32
+our sub fake-button-event(Display, uint64, Bool, ulong)
+    returns int64
     is native(&xtest-lib)
     is symbol('XTestFakeButtonEvent')
     { * }
 
-our sub fake-motion-event(Display, uint32, uint32, uint32, ulong)
-    returns int32
+our sub fake-motion-event(Display, uint64, uint64, uint64, ulong)
+    returns int64
     is native(&xtest-lib)
     is symbol('XTestFakeMotionEvent')
     { * }
 
-our sub fake-relative-motion-event(Display, uint32, uint32, ulong)
-    returns int32
+our sub fake-relative-motion-event(Display, uint64, uint64, ulong)
+    returns int64
     is native(&xtest-lib)
     is symbol('XTestFakeRelativeMotionEvent')
     { * }
