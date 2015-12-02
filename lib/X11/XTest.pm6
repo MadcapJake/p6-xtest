@@ -79,9 +79,9 @@ class XTest:ver<0.0.1> {
   has Display $!display;
   has KeyCode @!presses;
 
-  submethod BUILD(Str $display-str = ':0.0') {
+  submethod BUILD(Str:D $display-str = ':1') {
     $!display = open-display($display-str);
-    without $!display { die "unable to open display {$display-str}" }
+    without $!display { die "\nunable to open display {$display-str}" }
   }
 
   method close() { close-display($.display) }
@@ -92,8 +92,8 @@ class XTest:ver<0.0.1> {
       when $_ eq $_.uc { $key = "Shift-{$_}" }
     }
     for $key.split('-') {
-      $_ += '_L' if $_ eq any ['Shift', 'Alt', 'Control'];
-      append @!presses, keycode($!display, $_);
+      $_ ~= '_L' if $_ eq any ['Shift', 'Alt', 'Control'];
+      push @!presses, keycode($!display, $_);
     }
     { * }
   }
