@@ -1,5 +1,3 @@
-unit module SDL;
-
 use NativeCall;
 
 sub xtest-lib() { '/usr/include/X11/extensions/XTest.h' }
@@ -77,7 +75,7 @@ our sub fake-relative-motion-event(Display, uint32, uint32, ulong)
 
 =head XTest Perl 6 class
 
-class XTest {
+class XTest:ver<0.0.1> {
   has Display $!display;
   has KeyCode @!presses;
 
