@@ -91,7 +91,7 @@ class XTest:ver<0.0.1> {
       when $_ eq '-'   { $key = 'minus' }
       when $_ eq $_.uc { $key = "Shift-{$_}" }
     }
-    for $key.split('-') {
+    for $key.split('-') -> $_ is copy {
       $_ ~= '_L' if $_ eq any ['Shift', 'Alt', 'Control'];
       push @!presses, keycode($!display, $_);
     }
